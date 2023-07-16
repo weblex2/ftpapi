@@ -1,0 +1,37 @@
+.grid1{
+    @apply grid-cols-1
+}
+
+.grid2{
+    @apply grid-cols-2
+}
+.grid3{
+    @apply grid-cols-3
+}
+.grid4{
+    @apply grid-cols-4
+}
+.grid5{
+    @apply grid-cols-5
+}
+.grid6{
+    @apply grid-cols-6
+}
+.grid7{
+    @apply grid-cols-7
+}
+.grid8{
+    @apply grid-cols-8
+}
+.grid9{
+    @apply grid-cols-9
+}
+.grid10{
+    @apply grid-cols-10
+}
+.grid11{
+    @apply grid-cols-11
+}
+.grid12{
+    @apply grid-cols-12
+}
