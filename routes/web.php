@@ -34,10 +34,6 @@ Route::middleware([
 }); 
 
 
-Route::controller(PageController::class)->group(function () {
-    Route::get('/', 'index')->name('calendar.index'); 
-});
-
 Route::controller(PowerCloudRest::class)->group(function () {
     Route::get('/token', 'getToken')->name('pcGetToken'); 
 });
