@@ -20,9 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('apiauth', [AuthController::class, 'signin'])->name('login1');
-Route::get('apiauth', [AuthController::class, 'signin'])->name('login2');
-Route::post('register', [AuthController::class, 'signup']);
+Route::post('apiauth', [AuthController::class, 'signin2'])->name('login1');
+Route::get('apiauth', [AuthController::class, 'signin2'])->name('login2');
+Route::post('register', [AuthController::class, 'signup2']);
      
 Route::middleware('auth:sanctum')->group( function () {
     Route::resource('blog', ApiController::class);
