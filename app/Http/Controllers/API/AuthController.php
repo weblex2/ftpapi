@@ -10,11 +10,11 @@ use App\Models\User;
    
 class AuthController extends BaseController
 {
-    public function signin2(Request $request)
+    public function signin(Request $request)
     {
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){ 
             $authUser = Auth::user(); 
-            $success['token'] =  $authUser->createToken('MyAuthApp')->plainTextToken; 
+            $success['token'] =  $authUser->createToken('token')->plainTextToken; 
             $success['name'] =  $authUser->name;
    
             return $this->sendResponse($success, 'User signed in');
@@ -23,7 +23,7 @@ class AuthController extends BaseController
             return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
         } 
     }
-    public function signup2(Request $request)
+    public function signup(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
