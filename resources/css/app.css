@@ -1,9 +1,9 @@
-@import "resources/css/pages/ftp/main.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
+ 
 [x-cloak] {
     display: none;
 }
