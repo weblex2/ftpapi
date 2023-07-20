@@ -20,8 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('login', [AuthController::class, 'signin'])->name('login');
-Route::get('login', [AuthController::class, 'signin'])->name('login');
+Route::post('auth', [AuthController::class, 'signin'])->name('authpost');
+Route::get('auth', [AuthController::class, 'signin'])->name('authget');
 Route::post('register', [AuthController::class, 'signup']);
      
 Route::middleware('auth:sanctum')->group( function () {
