@@ -7,63 +7,53 @@ use App\Http\Controllers\API\BaseController as BaseController;
 use Validator;
 use App\Models\Apicustomer;
 use App\Http\Resources\Ftpapi;
+use App\Http\Controllers\PowerCloudRest;
    
 class ApiController extends BaseController
 {
     
     public function index()
     {
-        $apicustomer = Apicustomer::all();
-        return $this->sendResponse(Apicustomer::collection($apicustomer), 'Posts fetched.');
     }
     
     public function store(Request $request)
     {
+        $pc = new PowerCloudRest();
         $input = $request->all();
         $validator = Validator::make($input, [
-            'name' => 'required',
-            'email' => 'required',
+            'surname' => 'required',
+            'firstName' => 'required',
+            'business' => 'required',
             'client_id' => 'required',
         ]);
         if($validator->fails()){
-            return $this->sendError($validator->errors());       
+            return $this->sendError('Refused from FTP', $validator->errors());       
         }
-        $data['json'] = json_encode($input);
-        $data['client_id'] = $input['client_id'];
-        $res = Apicustomer::create($data);
-        return $this->sendResponse(new Ftpapi($res), 'Customer created.');
+        
+        // Send the data to Powercloud
+        $powercloud_response = $pc->createOrder($input);
+        // Check the success status and send response back
+        $success  = !(isset($powercloud_response['success'])) || $powercloud_response['success'] != true ? false : true; 
+        if ($success){
+            return $this->sendResponse(new Ftpapi($powercloud_response), 'Order created.',200);
+        }
+        else{
+             return $this->sendError('Refused from Powercloud', new Ftpapi($powercloud_response), 400);
+        }
         
     }
    
     public function show($id)
     {
-        $blog = Blog::find($id);
-        if (is_null($blog)) {
-            return $this->sendError('Post does not exist.');
-        }
-        return $this->sendResponse(new ApicustomerResource($blog), 'Post fetched.');
+
     }
     
-    public function update(Request $request, Aapicustomer $blog)
+    public function update(Request $request, Apicustomer $blog)
     {
-        $input = $request->all();
-        $validator = Validator::make($input, [
-            'title' => 'required',
-            'description' => 'required'
-        ]);
-        if($validator->fails()){
-            return $this->sendError($validator->errors());       
-        }
-        $blog->title = $input['title'];
-        $blog->description = $input['description'];
-        $apicustomer->save();
-        
-        return $this->sendResponse(new ApicustomerResource($blog), 'Post updated.');
     }
    
-    public function destroy(Aapicustomer $apicustomer)
+    public function destroy(Apicustomer $apicustomer)
     {
-        $apicustomer->delete();
-        return $this->sendResponse([], 'Post deleted.');
+
     }
 }

@@ -25,5 +25,5 @@ Route::get('apiauth', [AuthController::class, 'signin']);
 Route::post('register', [AuthController::class, 'signup']);
      
 Route::middleware('auth:sanctum')->group( function () {
-    Route::resource('blog', ApiController::class);
+    Route::resource('createOrder', ApiController::class);
 });

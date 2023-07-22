@@ -19,6 +19,10 @@ Route::get('/', function () {
     return view('welcome'); 
 });
 
+Route::get('/pctest', function () {
+    return view('welcome'); 
+});
+
 // Route::get('/', function () {
 //     return view('ftp.index');
 // });
@@ -35,5 +39,7 @@ Route::middleware([
 
 
 Route::controller(PowerCloudRest::class)->group(function () {
-    Route::get('/token', 'getToken')->name('pcGetToken'); 
+    Route::get('/getContract', 'test')->name('getContract'); 
+    Route::get('/orderTest', 'newOrderTest')->name('newOrderTest'); 
+    
 });
