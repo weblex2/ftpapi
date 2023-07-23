@@ -35,8 +35,7 @@ class PowerCloudRest extends Controller
         }    
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$url);
-		echo $url;
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         if ($verb=="POST") {
             curl_setopt($ch, CURLOPT_POST, 1);
