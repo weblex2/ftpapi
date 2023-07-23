@@ -42,19 +42,18 @@ class PowerCloudRest extends Controller
 		$res = curl_exec($ch);
         return $res;
 
-		if ($result === FALSE) {
+		if ($res === FALSE) {
 			printf("cUrl error (#%d): %s<br>\n",
-				   curl_errno($curlHandle),
-				   htmlspecialchars(curl_error($curlHandle)))
+				   curl_errno($ch),
+				   htmlspecialchars(curl_error($ch)))
 				   ;
 		}
 		
 		rewind($streamVerboseHandle);
 		$verboseLog = stream_get_contents($streamVerboseHandle);
 		
-		echo "cUrl verbose information:\n", 
-			 "<pre>", htmlspecialchars($verboseLog), "</pre>\n";
-
+		file_put_contents('log.txt', $verboseLog);
+		file_put_contents('log2.txt', $res);
     }
 
 
