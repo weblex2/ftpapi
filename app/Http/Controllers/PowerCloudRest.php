@@ -12,6 +12,13 @@ class PowerCloudRest extends Controller
         $user    = env("PC_REST_USER");
         $pw      = env("PC_REST_PASSWORD");
         $hash    = env("PC_REST_HASH");
+
+
+		$baseUrl="https://app.powercloud.de/rest:";
+		$user="Fairtrade-Rest-Prod";
+		$pw="vQxKgfWgsvAY7Tp7E9FG";
+		$hash="9d4da1fe24e7da45dfc5c242af40d913";
+
         $context=$type.$user.":".$pw;
         $credentials = $type."#".$user.":".$pw;
         $headers = array(
