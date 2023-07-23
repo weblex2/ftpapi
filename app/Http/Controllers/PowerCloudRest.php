@@ -40,7 +40,7 @@ class PowerCloudRest extends Controller
 		$streamVerboseHandle = fopen('php://temp', 'w+');
 		curl_setopt($ch, CURLOPT_STDERR, $streamVerboseHandle);
 		$res = curl_exec($ch);
-        return $res;
+        
 
 		if ($res === FALSE) {
 			printf("cUrl error (#%d): %s<br>\n",
@@ -54,6 +54,7 @@ class PowerCloudRest extends Controller
 		
 		file_put_contents('log.txt', $verboseLog);
 		file_put_contents('log2.txt', $res);
+		return $res;
     }
 
 
