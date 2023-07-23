@@ -35,10 +35,26 @@ class PowerCloudRest extends Controller
         }    
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($ch, CURLOPT_USERPWD, $context);
-        $res = curl_exec($ch);
+
+		curl_setopt($ch, CURLOPT_VERBOSE, true);
+		$streamVerboseHandle = fopen('php://temp', 'w+');
+		curl_setopt($ch, CURLOPT_STDERR, $streamVerboseHandle);
+		$res = curl_exec($ch);
         return $res;
-        #$result = json_decode($res,true);
-        #return $result!=false ? $result : json_encode(['message'=>$res]);
+
+		if ($result === FALSE) {
+			printf("cUrl error (#%d): %s<br>\n",
+				   curl_errno($curlHandle),
+				   htmlspecialchars(curl_error($curlHandle)))
+				   ;
+		}
+		
+		rewind($streamVerboseHandle);
+		$verboseLog = stream_get_contents($streamVerboseHandle);
+		
+		echo "cUrl verbose information:\n", 
+			 "<pre>", htmlspecialchars($verboseLog), "</pre>\n";
+
     }
 
 
