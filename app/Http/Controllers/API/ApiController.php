@@ -35,7 +35,7 @@ class ApiController extends BaseController
         // Check the success status and send response back
         $success  = !(isset($powercloud_response['success'])) || $powercloud_response['success'] != true ? false : true; 
         if ($success){
-            return $this->sendResponse(new Ftpapi(json_decode($powercloud_response), 'Order created.',200);
+            return $this->sendResponse(new Ftpapi($powercloud_response), 'Order created.',200);
         }
         else{
              return $this->sendError('Refused from Powercloud', new Ftpapi($powercloud_response), 400);
