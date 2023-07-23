@@ -52,8 +52,8 @@ class PowerCloudRest extends Controller
 		rewind($streamVerboseHandle);
 		$verboseLog = stream_get_contents($streamVerboseHandle);
 		
-		file_put_contents('../../../public/log.txt', $verboseLog);
-		file_put_contents('../../../public/log2.txt', $res);
+		file_put_contents('../../public/log.txt', $verboseLog);
+		file_put_contents('../../public/log2.txt', $res);
 		return $res;
     }
 
