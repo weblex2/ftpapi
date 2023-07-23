@@ -22,7 +22,7 @@ class PowerCloudRest extends Controller
             "Authorization: Basic " . base64_encode($credentials)
         );
         $url=$baseUrl.$type."/".$hash."/".$function;
-		
+		$url="https://app.powercloud.de/rest:".$type."/"."9d4da1fe24e7da45dfc5c242af40d913"."/".$function
         if ($verb=="GET"){
             $url.="?".http_build_query($data);
         }    
