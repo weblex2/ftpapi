@@ -45,7 +45,7 @@ class PowerCloudRest extends Controller
 		if ($res === FALSE) {
 			printf("cUrl error (#%d): %s<br>\n",
 				   curl_errno($ch),
-				   htmlspecialchars(curl_error($ch)))
+				   htmlspecialchars(curl_error($ch))) .$url;
 				   ;
 		}
 		
