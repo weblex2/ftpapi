@@ -21,12 +21,14 @@ class PowerCloudRest extends Controller
             "Pragma: no-cache",
             "Authorization: Basic " . base64_encode($credentials)
         );
-        $url=$baseUrl.$type."/".$hash."/".$function;
+        $url=$baseUrl.$type."//".$hash."//".$function;
+		
         if ($verb=="GET"){
             $url.="?".http_build_query($data);
         }    
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$url);
+		echo $url;
         curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         if ($verb=="POST") {
