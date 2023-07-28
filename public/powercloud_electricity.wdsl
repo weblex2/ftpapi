@@ -1,0 +1,1620 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://electricity.enet.service.ws.crmi.de/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="Electricity" targetNamespace="http://electricity.enet.service.ws.crmi.de/">
+<wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://misc.service.ws.crmi.de/" elementFormDefault="unqualified" targetNamespace="http://misc.service.ws.crmi.de/" version="1.0">
+<xs:element name="ping" type="tns:ping"/>
+<xs:element name="pingResponse" type="tns:pingResponse"/>
+<xs:complexType name="ping">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="pingResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="pong" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://electricity.vx.service.ws.crmi.de/" xmlns:ns1="http://electricity.enet.service.ws.crmi.de/" elementFormDefault="unqualified" targetNamespace="http://electricity.vx.service.ws.crmi.de/" version="1.0">
+<xs:import namespace="http://electricity.enet.service.ws.crmi.de/"/>
+<xs:element name="calculateDeposit" type="tns:calculateDeposit"/>
+<xs:element name="calculateDepositResponse" type="tns:calculateDepositResponse"/>
+<xs:element name="getConfig" type="tns:getConfig"/>
+<xs:element name="getConfigResponse" type="tns:getConfigResponse"/>
+<xs:element name="getProductsByCampaign" type="tns:getProductsByCampaign"/>
+<xs:element name="getProductsByCampaignResponse" type="tns:getProductsByCampaignResponse"/>
+<xs:element name="isValid" type="tns:isValid"/>
+<xs:element name="isValidResponse" type="tns:isValidResponse"/>
+<xs:element name="revalidate" type="tns:revalidate"/>
+<xs:element name="revalidateResponse" type="tns:revalidateResponse"/>
+<xs:element name="unitTest" type="tns:unitTest"/>
+<xs:element name="unitTestResponse" type="tns:unitTestResponse"/>
+<xs:complexType name="calculateDeposit">
+<xs:sequence>
+<xs:element name="basePriceBrutto" type="xs:float"/>
+<xs:element name="meterChargeBrutto" type="xs:float"/>
+<xs:element name="usage" type="xs:float"/>
+<xs:element minOccurs="0" name="usageNT" type="xs:float"/>
+<xs:element name="workingPriceBrutto" type="xs:float"/>
+<xs:element minOccurs="0" name="workingPriceNTBrutto" type="xs:float"/>
+<xs:element name="depositDivisor" type="xs:int"/>
+<xs:element name="round" type="xs:boolean"/>
+<xs:element minOccurs="0" name="bonusOptions" type="ns1:depositBonus"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="calculateDepositResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="deposit" type="ns1:deposit"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getProductsByCampaign">
+<xs:sequence>
+<xs:element minOccurs="0" name="campaignIdentifier" type="xs:string"/>
+<xs:element minOccurs="0" name="alternativeTariffHost" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getProductsByCampaignResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="products" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="unitTest">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="unitTestResponse">
+<xs:sequence>
+<xs:element name="success" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="revalidate">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="revalidateResponse">
+<xs:sequence>
+<xs:element name="valid" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getConfig">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="getConfigResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="config" type="ns1:assoc"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="isValid">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="isValidResponse">
+<xs:sequence>
+<xs:element name="valid" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://electricity.enet.service.ws.crmi.de/" xmlns:ns1="http://misc.service.ws.crmi.de/" xmlns:ns0="http://electricity.vx.service.ws.crmi.de/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://electricity.enet.service.ws.crmi.de/">
+<xs:element name="getAllPrimaryProductInformation" type="tns:getAllPrimaryProductInformation"/>
+<xs:element name="getAllPrimaryProductInformationResponse" type="tns:getAllPrimaryProductInformationResponse"/>
+<xs:element name="getAllProviders" type="tns:getAllProviders"/>
+<xs:element name="getAllProvidersResponse" type="tns:getAllProvidersResponse"/>
+<xs:element name="getBasicSuppliersForPostCode" type="tns:getBasicSuppliersForPostCode"/>
+<xs:element name="getBasicSuppliersForPostCodeResponse" type="tns:getBasicSuppliersForPostCodeResponse"/>
+<xs:element name="getCities" type="tns:getCities"/>
+<xs:element name="getCitiesByPostcode" type="tns:getCitiesByPostcode"/>
+<xs:element name="getCitiesByPostcodeResponse" type="tns:getCitiesByPostcodeResponse"/>
+<xs:element name="getCitiesResponse" type="tns:getCitiesResponse"/>
+<xs:element name="getCityById" type="tns:getCityById"/>
+<xs:element name="getCityByIdResponse" type="tns:getCityByIdResponse"/>
+<xs:element name="getComparedProductInformationList" type="tns:getComparedProductInformationList"/>
+<xs:element name="getComparedProductInformationListResponse" type="tns:getComparedProductInformationListResponse"/>
+<xs:element name="getComparedProductInformationSimple" type="tns:getComparedProductInformationSimple"/>
+<xs:element name="getComparedProductInformationSimpleResponse" type="tns:getComparedProductInformationSimpleResponse"/>
+<xs:element name="getComparedProductInformationSingle" type="tns:getComparedProductInformationSingle"/>
+<xs:element name="getComparedProductInformationSingleResponse" type="tns:getComparedProductInformationSingleResponse"/>
+<xs:element name="getEffectiveDate" type="tns:getEffectiveDate"/>
+<xs:element name="getEffectiveDateResponse" type="tns:getEffectiveDateResponse"/>
+<xs:element name="getGridData" type="tns:getGridData"/>
+<xs:element name="getGridDataResponse" type="tns:getGridDataResponse"/>
+<xs:element name="getModuleInformation" type="tns:getModuleInformation"/>
+<xs:element name="getModuleInformationResponse" type="tns:getModuleInformationResponse"/>
+<xs:element name="getNetCarriers" type="tns:getNetCarriers"/>
+<xs:element name="getNetCarriersResponse" type="tns:getNetCarriersResponse"/>
+<xs:element name="getNetData" type="tns:getNetData"/>
+<xs:element name="getNetDataResponse" type="tns:getNetDataResponse"/>
+<xs:element name="getNetFee" type="tns:getNetFee"/>
+<xs:element name="getNetFeeResponse" type="tns:getNetFeeResponse"/>
+<xs:element name="getNetFees" type="tns:getNetFees"/>
+<xs:element name="getNetFeesResponse" type="tns:getNetFeesResponse"/>
+<xs:element name="getPrimaryProductInformation" type="tns:getPrimaryProductInformation"/>
+<xs:element name="getPrimaryProductInformationResponse" type="tns:getPrimaryProductInformationResponse"/>
+<xs:element name="getPrimaryProducts" type="tns:getPrimaryProducts"/>
+<xs:element name="getPrimaryProductsResponse" type="tns:getPrimaryProductsResponse"/>
+<xs:element name="getPrimaryProviders" type="tns:getPrimaryProviders"/>
+<xs:element name="getPrimaryProvidersResponse" type="tns:getPrimaryProvidersResponse"/>
+<xs:element name="getProductPriceInformation" type="tns:getProductPriceInformation"/>
+<xs:element name="getProductPriceInformationResponse" type="tns:getProductPriceInformationResponse"/>
+<xs:element name="getProviderByCodeNumber" type="tns:getProviderByCodeNumber"/>
+<xs:element name="getProviderByCodeNumberResponse" type="tns:getProviderByCodeNumberResponse"/>
+<xs:element name="getProviderById" type="tns:getProviderById"/>
+<xs:element name="getProviderByIdResponse" type="tns:getProviderByIdResponse"/>
+<xs:element name="getProviderProductNames" type="tns:getProviderProductNames"/>
+<xs:element name="getProviderProductNamesResponse" type="tns:getProviderProductNamesResponse"/>
+<xs:element name="getStreetData" type="tns:getStreetData"/>
+<xs:element name="getStreetDataResponse" type="tns:getStreetDataResponse"/>
+<xs:element name="getStreetsByCityId" type="tns:getStreetsByCityId"/>
+<xs:element name="getStreetsByCityIdResponse" type="tns:getStreetsByCityIdResponse"/>
+<xs:complexType name="getBasicSuppliersForPostCode">
+<xs:sequence>
+<xs:element name="postcode" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getBasicSuppliersForPostCodeResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="provider" type="tns:primaryProvider"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="primaryProvider">
+<xs:sequence>
+<xs:element name="id" type="xs:int"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+<xs:element name="primary" type="xs:boolean"/>
+<xs:element minOccurs="0" name="codeNumber" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getModuleInformation">
+<xs:sequence>
+<xs:element name="cityId" type="xs:long"/>
+<xs:element name="usage" type="xs:int"/>
+<xs:element minOccurs="0" name="usageNT" type="xs:int"/>
+<xs:element name="netNumber" type="xs:int"/>
+<xs:element name="business" type="xs:boolean"/>
+<xs:element minOccurs="0" name="modules" type="xs:string"/>
+<xs:element minOccurs="0" name="codeNumberBlacklist" type="xs:string"/>
+<xs:element minOccurs="0" name="customConfig" type="xs:string"/>
+<xs:element minOccurs="0" name="productConfig" type="xs:string"/>
+<xs:element minOccurs="0" name="campaignIdentifier" type="xs:string"/>
+<xs:element minOccurs="0" name="fixedConfig" type="xs:string"/>
+<xs:element minOccurs="0" name="tariffHost" type="xs:string"/>
+<xs:element minOccurs="0" name="startDate" type="xs:string"/>
+<xs:element minOccurs="0" name="endDate" type="xs:string"/>
+<xs:element minOccurs="0" name="signatureDate" type="xs:string"/>
+<xs:element name="settingEco" type="xs:boolean"/>
+<xs:element name="settingFakeEco" type="xs:boolean"/>
+<xs:element name="initialDuration" type="xs:int"/>
+<xs:element name="settingPackage" type="xs:boolean"/>
+<xs:element name="settingBonus" type="xs:boolean"/>
+<xs:element name="settingPrepaid" type="xs:boolean"/>
+<xs:element name="settingGuarantee" type="xs:boolean"/>
+<xs:element name="ignoreDateFilters" type="xs:boolean"/>
+<xs:element name="skipModuleFiltering" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getModuleInformationResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="information" type="tns:moduleInformation"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="moduleInformation">
+<xs:complexContent>
+<xs:extension base="tns:productInformation">
+<xs:sequence>
+<xs:element name="isModule" type="xs:boolean"/>
+<xs:element minOccurs="0" name="moduleName" type="xs:string"/>
+<xs:element minOccurs="0" name="moduleKey" type="xs:string"/>
+<xs:element name="requiresUserConfirmation" type="xs:boolean"/>
+<xs:element name="requiresBankData" type="xs:boolean"/>
+<xs:element name="userConfirmationActivated" type="xs:boolean"/>
+<xs:element name="requiresConnectorInformation" type="xs:boolean"/>
+<xs:element name="basePriceContainsMeterCharge" type="xs:boolean"/>
+<xs:element minOccurs="0" name="debugInformation" type="xs:string"/>
+<xs:element minOccurs="0" name="priceKey" type="xs:string"/>
+<xs:element minOccurs="0" name="identifier" type="xs:string"/>
+<xs:element minOccurs="0" name="descriptionExternal" type="xs:string"/>
+<xs:element minOccurs="0" name="properties" type="xs:string"/>
+<xs:element minOccurs="0" name="agb" type="xs:string"/>
+<xs:element name="startPosition" type="xs:int"/>
+<xs:element name="endPosition" type="xs:int"/>
+<xs:element name="hasAddOns" type="xs:boolean"/>
+<xs:element minOccurs="0" name="productCode" type="xs:string"/>
+<xs:element name="productVersion" type="xs:int"/>
+<xs:element minOccurs="0" name="campaignIdentifier" type="xs:string"/>
+<xs:element minOccurs="0" name="bonusName" type="xs:string"/>
+<xs:element minOccurs="0" name="bonusExternalId" type="xs:long"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="productInformation">
+<xs:complexContent>
+<xs:extension base="tns:companyData">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="premiumDescriptionTexts" nillable="true" type="xs:string"/>
+<xs:element name="variant" type="xs:int"/>
+<xs:element name="providerId" type="xs:int"/>
+<xs:element name="providerParentId" type="xs:int"/>
+<xs:element name="productId" type="xs:long"/>
+<xs:element name="priceId" type="xs:long"/>
+<xs:element minOccurs="0" name="description" type="xs:string"/>
+<xs:element minOccurs="0" name="priceGuaranty" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="initialDurationDate" type="xs:dateTime"/>
+<xs:element name="ka" type="xs:float"/>
+<xs:element minOccurs="0" name="deposit" type="tns:deposit"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType abstract="true" name="companyData">
+<xs:complexContent>
+<xs:extension base="tns:productData">
+<xs:sequence>
+<xs:element minOccurs="0" name="providerName" type="xs:string"/>
+<xs:element minOccurs="0" name="providerCodeNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="street" type="xs:string"/>
+<xs:element minOccurs="0" name="postcode" type="xs:string"/>
+<xs:element minOccurs="0" name="city" type="xs:string"/>
+<xs:element minOccurs="0" name="website" type="xs:string"/>
+<xs:element minOccurs="0" name="productLink" type="xs:string"/>
+<xs:element name="providerRating" type="xs:int"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType abstract="true" name="productData">
+<xs:sequence>
+<xs:element minOccurs="0" name="productName" type="xs:string"/>
+<xs:element minOccurs="0" name="productNameSimplified" type="xs:string"/>
+<xs:element minOccurs="0" name="supplyType" type="xs:string"/>
+<xs:element minOccurs="0" name="consumptionType" type="xs:string"/>
+<xs:element minOccurs="0" name="priceType" type="xs:string"/>
+<xs:element minOccurs="0" name="pricingType" type="xs:string"/>
+<xs:element name="eco" type="xs:boolean"/>
+<xs:element name="ecoPercentage" type="xs:float"/>
+<xs:element name="ecoCertificates" type="xs:int"/>
+<xs:element name="onlineProduct" type="xs:boolean"/>
+<xs:element name="packageProduct" type="xs:boolean"/>
+<xs:element minOccurs="0" name="fixedPrice" type="tns:fixedPriceType"/>
+<xs:element name="fixedPriceMonths" type="xs:int"/>
+<xs:element minOccurs="0" name="fixedPriceDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="productType" type="tns:productType"/>
+<xs:element name="usageInclusive" type="xs:int"/>
+<xs:element name="overConsumptionWorkingPrice" type="xs:float"/>
+<xs:element name="overConsumptionWorkingPriceNetto" type="xs:float"/>
+<xs:element name="overConsumptionWorkingPriceBrutto" type="xs:float"/>
+<xs:element name="primary" type="xs:boolean"/>
+<xs:element minOccurs="0" name="validFrom" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="validUntil" type="xs:dateTime"/>
+<xs:element name="usageFrom" type="xs:int"/>
+<xs:element name="usageTo" type="xs:int"/>
+<xs:element minOccurs="0" name="inclusivePower" type="xs:int"/>
+<xs:element minOccurs="0" name="additiveBasePricePerUnit" type="xs:float"/>
+<xs:element name="workingPrice" type="xs:float"/>
+<xs:element name="workingPriceNetto" type="xs:float"/>
+<xs:element name="workingPriceBrutto" type="xs:float"/>
+<xs:element name="basePriceNetto" type="xs:float"/>
+<xs:element name="basePriceBrutto" type="xs:float"/>
+<xs:element name="meterChargeNetto" type="xs:float"/>
+<xs:element name="meterChargeBrutto" type="xs:float"/>
+<xs:element name="workingPriceNT" type="xs:float"/>
+<xs:element name="workingPriceNTNetto" type="xs:float"/>
+<xs:element name="workingPriceNTBrutto" type="xs:float"/>
+<xs:element minOccurs="0" name="quantityScalePrices">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="quantityScalePrice" type="tns:quantityScalePrice"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="prepaid" type="xs:boolean"/>
+<xs:element name="includeBonusInDepositCalculation" type="xs:boolean"/>
+<xs:element name="bonusSavings" type="xs:float"/>
+<xs:element name="bonusSavingsNetto" type="xs:float"/>
+<xs:element name="bonusSavingsPercentage" type="xs:float"/>
+<xs:element name="instantBonus" type="xs:float"/>
+<xs:element name="instantBonusNetto" type="xs:float"/>
+<xs:element name="switchingBonus" type="xs:float"/>
+<xs:element name="switchingBonusNetto" type="xs:float"/>
+<xs:element name="recurringBonus" type="xs:float"/>
+<xs:element name="recurringBonusNetto" type="xs:float"/>
+<xs:element minOccurs="0" name="bonusType" type="tns:bonusType"/>
+<xs:element name="workingPriceBonusSwitching" type="xs:float"/>
+<xs:element name="workingPriceBonusSwitchingNetto" type="xs:float"/>
+<xs:element name="usageWorkingPriceBonusSwitchingBrutto" type="xs:float"/>
+<xs:element name="usageWorkingPriceBonusSwitchingNetto" type="xs:float"/>
+<xs:element name="deviance" type="xs:float"/>
+<xs:element name="devianceNetto" type="xs:float"/>
+<xs:element name="workingPriceTax" type="xs:float"/>
+<xs:element name="workingPricePowerTax" type="xs:float"/>
+<xs:element name="basePriceTax" type="xs:float"/>
+<xs:element name="meterChargeTax" type="xs:float"/>
+<xs:element name="overConsumptionWorkingPriceTax" type="xs:float"/>
+<xs:element name="workingPriceNTTax" type="xs:float"/>
+<xs:element name="usagePriceBrutto" type="xs:float"/>
+<xs:element name="usagePriceNetto" type="xs:float"/>
+<xs:element name="overConsumptionPriceBrutto" type="xs:float"/>
+<xs:element name="overConsumptionPriceNetto" type="xs:float"/>
+<xs:element name="totalBasePriceBrutto" type="xs:float"/>
+<xs:element name="totalBasePriceNetto" type="xs:float"/>
+<xs:element name="totalBasePriceBonusBrutto" type="xs:float"/>
+<xs:element name="totalBasePriceBonusNetto" type="xs:float"/>
+<xs:element name="initialDuration" type="xs:float"/>
+<xs:element minOccurs="0" name="initialDurationType" type="tns:durationType"/>
+<xs:element name="renewalDuration" type="xs:float"/>
+<xs:element minOccurs="0" name="renewalDurationType" type="tns:durationType"/>
+<xs:element name="cancellationPeriod" type="xs:float"/>
+<xs:element name="cancellationPeriodDays" type="xs:float"/>
+<xs:element minOccurs="0" name="cancellationPeriodDaysType" type="tns:durationType"/>
+<xs:element name="everyTimeCancellable" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deposit">
+<xs:sequence>
+<xs:element name="brutto" type="xs:float"/>
+<xs:element name="netto" type="xs:float"/>
+<xs:element name="divisor" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="quantityScalePrice">
+<xs:sequence>
+<xs:element name="basePriceNetto" type="xs:float"/>
+<xs:element name="basePriceBrutto" type="xs:float"/>
+<xs:element name="basePriceTax" type="xs:float"/>
+<xs:element name="bonusSavings" type="xs:float"/>
+<xs:element name="bonusSavingsNetto" type="xs:float"/>
+<xs:element name="bonusSavingsPercentage" type="xs:float"/>
+<xs:element minOccurs="0" name="bonusType" type="tns:bonusType"/>
+<xs:element name="instantBonus" type="xs:float"/>
+<xs:element name="instantBonusNetto" type="xs:float"/>
+<xs:element name="meterChargeNetto" type="xs:float"/>
+<xs:element name="meterChargeBrutto" type="xs:float"/>
+<xs:element name="meterChargeTax" type="xs:float"/>
+<xs:element name="overConsumptionWorkingPrice" type="xs:float"/>
+<xs:element name="overConsumptionWorkingPriceTax" type="xs:float"/>
+<xs:element name="overConsumptionWorkingPriceNetto" type="xs:float"/>
+<xs:element name="overConsumptionWorkingPriceBrutto" type="xs:float"/>
+<xs:element name="recurringBonus" type="xs:float"/>
+<xs:element name="recurringBonusNetto" type="xs:float"/>
+<xs:element name="switchingBonus" type="xs:float"/>
+<xs:element name="switchingBonusNetto" type="xs:float"/>
+<xs:element name="usageInclusive" type="xs:int"/>
+<xs:element name="usageFrom" type="xs:int"/>
+<xs:element name="usageTo" type="xs:int"/>
+<xs:element name="usageForCalculation" type="xs:int"/>
+<xs:element name="workingPrice" type="xs:float"/>
+<xs:element name="workingPriceNetto" type="xs:float"/>
+<xs:element name="workingPriceBrutto" type="xs:float"/>
+<xs:element name="workingPriceTax" type="xs:float"/>
+<xs:element name="workingPriceNT" type="xs:float"/>
+<xs:element name="workingPriceNTNetto" type="xs:float"/>
+<xs:element name="workingPriceNTBrutto" type="xs:float"/>
+<xs:element name="workingPriceNTTax" type="xs:float"/>
+<xs:element name="workingPricePowerTax" type="xs:float"/>
+<xs:element minOccurs="0" name="inclusivePower" type="xs:int"/>
+<xs:element minOccurs="0" name="additiveBasePricePerUnit" type="xs:float"/>
+<xs:element name="deviance" type="xs:float"/>
+<xs:element name="devianceNetto" type="xs:float"/>
+<xs:element name="usagePriceBrutto" type="xs:float"/>
+<xs:element name="usagePriceNetto" type="xs:float"/>
+<xs:element name="overConsumptionPriceBrutto" type="xs:float"/>
+<xs:element name="overConsumptionPriceNetto" type="xs:float"/>
+<xs:element name="totalBasePriceBrutto" type="xs:float"/>
+<xs:element name="totalBasePriceNetto" type="xs:float"/>
+<xs:element name="workingPriceBonusSwitching" type="xs:float"/>
+<xs:element name="workingPriceBonusSwitchingNetto" type="xs:float"/>
+<xs:element name="usageWorkingPriceBonusSwitchingBrutto" type="xs:float"/>
+<xs:element name="usageWorkingPriceBonusSwitchingNetto" type="xs:float"/>
+<xs:element name="totalBasePriceBonusBrutto" type="xs:float"/>
+<xs:element name="totalBasePriceBonusNetto" type="xs:float"/>
+<xs:element minOccurs="0" name="validFrom" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="validUntil" type="xs:dateTime"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="depositBonus">
+<xs:sequence>
+<xs:element name="includeBonus" type="xs:boolean"/>
+<xs:element name="bonus" type="xs:float"/>
+<xs:element minOccurs="0" name="bonusType" type="tns:bonusType"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getComparedProductInformationSimple">
+<xs:sequence>
+<xs:element name="cityId" type="xs:long"/>
+<xs:element name="providerId" type="xs:int"/>
+<xs:element name="productId" type="xs:long"/>
+<xs:element name="variant" type="xs:int"/>
+<xs:element name="usage" type="xs:int"/>
+<xs:element name="netNumber" type="xs:int"/>
+<xs:element name="business" type="xs:boolean"/>
+<xs:element minOccurs="0" name="modules" type="xs:string"/>
+<xs:element minOccurs="0" name="customConfig" type="xs:string"/>
+<xs:element minOccurs="0" name="productConfig" type="xs:string"/>
+<xs:element minOccurs="0" name="campaignIdentifier" type="xs:string"/>
+<xs:element minOccurs="0" name="fixedConfig" type="xs:string"/>
+<xs:element minOccurs="0" name="tariffHost" type="xs:string"/>
+<xs:element minOccurs="0" name="savingsMode" type="tns:savingsMode"/>
+<xs:element minOccurs="0" name="startDate" type="xs:string"/>
+<xs:element minOccurs="0" name="endDate" type="xs:string"/>
+<xs:element minOccurs="0" name="signatureDate" type="xs:string"/>
+<xs:element name="settingEco" type="xs:boolean"/>
+<xs:element name="settingFakeEco" type="xs:boolean"/>
+<xs:element name="initialDuration" type="xs:int"/>
+<xs:element name="settingPackage" type="xs:boolean"/>
+<xs:element name="settingBonus" type="xs:boolean"/>
+<xs:element name="settingPrepaid" type="xs:boolean"/>
+<xs:element name="settingGuarantee" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getComparedProductInformationSimpleResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="information" type="tns:comparedProductInformation"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="comparedProductInformation">
+<xs:complexContent>
+<xs:extension base="tns:moduleInformation">
+<xs:sequence>
+<xs:element name="productSavings" type="xs:float"/>
+<xs:element name="productSavingsNetto" type="xs:float"/>
+<xs:element name="totalSavings" type="xs:float"/>
+<xs:element name="totalSavingsNetto" type="xs:float"/>
+<xs:element name="totalSavingsPercentage" type="xs:float"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="getEffectiveDate">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="getEffectiveDateResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="date" type="xs:dateTime"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getProviderProductNames">
+<xs:sequence>
+<xs:element name="providerId" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getProviderProductNamesResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="productName" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getGridData">
+<xs:sequence>
+<xs:element name="cityId" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getGridDataResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="data" type="tns:gridData"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="gridData">
+<xs:sequence>
+<xs:element name="id" type="xs:int"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getNetFee">
+<xs:sequence>
+<xs:element name="cityId" type="xs:long"/>
+<xs:element name="usage" type="xs:int"/>
+<xs:element name="netNumber" type="xs:int"/>
+<xs:element minOccurs="0" name="startDate" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getNetFeeResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="netFee" type="tns:netFee"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="netFee">
+<xs:sequence>
+<xs:element name="meterChargeNetto" type="xs:float"/>
+<xs:element name="workingPriceNetto" type="xs:float"/>
+<xs:element name="regularEnergyLevy" type="xs:float"/>
+<xs:element name="basePriceNetto" type="xs:float"/>
+<xs:element name="ka" type="xs:float"/>
+<xs:element name="usageFrom" type="xs:int"/>
+<xs:element name="usageTo" type="xs:int"/>
+<xs:element minOccurs="0" name="validFrom" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="validUntil" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="netName" type="xs:string"/>
+<xs:element name="netNumber" type="xs:int"/>
+<xs:element name="netAreaNumber" type="xs:int"/>
+<xs:element name="netSubNumber" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getPrimaryProductInformation">
+<xs:sequence>
+<xs:element name="cityId" type="xs:long"/>
+<xs:element name="productId" type="xs:long"/>
+<xs:element name="providerId" type="xs:int"/>
+<xs:element name="usage" type="xs:int"/>
+<xs:element name="business" type="xs:boolean"/>
+<xs:element name="netNumber" type="xs:int"/>
+<xs:element name="variant" type="xs:int"/>
+<xs:element minOccurs="0" name="startDate" type="xs:string"/>
+<xs:element minOccurs="0" name="endDate" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getPrimaryProductInformationResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="information" type="tns:productInformation"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getComparedProductInformationSingle">
+<xs:sequence>
+<xs:element name="cityId" type="xs:long"/>
+<xs:element name="providerId" type="xs:int"/>
+<xs:element name="productId" type="xs:long"/>
+<xs:element name="variant" type="xs:int"/>
+<xs:element name="usage" type="xs:int"/>
+<xs:element name="netNumber" type="xs:int"/>
+<xs:element name="business" type="xs:boolean"/>
+<xs:element minOccurs="0" name="modules" type="xs:string"/>
+<xs:element minOccurs="0" name="customConfig" type="xs:string"/>
+<xs:element minOccurs="0" name="productConfig" type="xs:string"/>
+<xs:element minOccurs="0" name="campaignIdentifier" type="xs:string"/>
+<xs:element minOccurs="0" name="fixedConfig" type="xs:string"/>
+<xs:element minOccurs="0" name="tariffHost" type="xs:string"/>
+<xs:element minOccurs="0" name="savingsMode" type="tns:savingsMode"/>
+<xs:element name="newProviderId" type="xs:int"/>
+<xs:element name="newProductId" type="xs:long"/>
+<xs:element name="newVariant" type="xs:long"/>
+<xs:element minOccurs="0" name="startDate" type="xs:string"/>
+<xs:element minOccurs="0" name="endDate" type="xs:string"/>
+<xs:element minOccurs="0" name="signatureDate" type="xs:string"/>
+<xs:element name="settingEco" type="xs:boolean"/>
+<xs:element name="settingFakeEco" type="xs:boolean"/>
+<xs:element name="initialDuration" type="xs:int"/>
+<xs:element name="settingPackage" type="xs:boolean"/>
+<xs:element name="settingBonus" type="xs:boolean"/>
+<xs:element name="settingPrepaid" type="xs:boolean"/>
+<xs:element name="settingGuarantee" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getComparedProductInformationSingleResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="information" type="tns:comparedProductInformation"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCityById">
+<xs:sequence>
+<xs:element name="cityId" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCityByIdResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="city" type="tns:city"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="city">
+<xs:sequence>
+<xs:element name="id" type="xs:long"/>
+<xs:element name="postcode" type="xs:int"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getStreetsByCityId">
+<xs:sequence>
+<xs:element name="cityId" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getStreetsByCityIdResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="street" type="tns:street"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="street">
+<xs:sequence>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getNetCarriers">
+<xs:sequence>
+<xs:element name="cityId" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getNetCarriersResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="netCarriers" type="tns:netCarrierData"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="netCarrierData">
+<xs:sequence>
+<xs:element name="netNumber" type="xs:int"/>
+<xs:element minOccurs="0" name="netName" type="xs:string"/>
+<xs:element name="netSubNumber" type="xs:int"/>
+<xs:element name="netAreaNumber" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getAllProviders">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="getAllProvidersResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="provider" type="tns:primaryProvider"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getAllPrimaryProductInformation">
+<xs:sequence>
+<xs:element name="cityId" type="xs:long"/>
+<xs:element name="providerId" type="xs:int"/>
+<xs:element name="usage" type="xs:int"/>
+<xs:element name="business" type="xs:boolean"/>
+<xs:element name="netNumber" type="xs:int"/>
+<xs:element minOccurs="0" name="startDate" type="xs:string"/>
+<xs:element minOccurs="0" name="endDate" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getAllPrimaryProductInformationResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="information" type="tns:productInformation"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getPrimaryProviders">
+<xs:sequence>
+<xs:element name="cityId" type="xs:long"/>
+<xs:element name="usage" type="xs:int"/>
+<xs:element name="business" type="xs:boolean"/>
+<xs:element name="netNumber" type="xs:int"/>
+<xs:element name="primaryProviderId" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getPrimaryProvidersResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="provider" type="tns:primaryProvider"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCities">
+<xs:sequence>
+<xs:element name="offset" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCitiesResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="city" type="tns:city"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getStreetData">
+<xs:sequence>
+<xs:element name="cityId" type="xs:long"/>
+<xs:element minOccurs="0" name="streetName" type="xs:string"/>
+<xs:element name="houseNumber" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getStreetDataResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="data" type="tns:streetData"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="streetData">
+<xs:complexContent>
+<xs:extension base="tns:street">
+<xs:sequence>
+<xs:element name="netNumber" type="xs:int"/>
+<xs:element name="netSubNumber" type="xs:int"/>
+<xs:element name="netAreaNumber" type="xs:int"/>
+<xs:element name="primaryProviderId" type="xs:int"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="getCitiesByPostcode">
+<xs:sequence>
+<xs:element name="postcode" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCitiesByPostcodeResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="city" type="tns:city"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getComparedProductInformationList">
+<xs:sequence>
+<xs:element name="cityId" type="xs:long"/>
+<xs:element name="providerId" type="xs:int"/>
+<xs:element name="productId" type="xs:long"/>
+<xs:element name="variant" type="xs:int"/>
+<xs:element name="usage" type="xs:int"/>
+<xs:element name="netNumber" type="xs:int"/>
+<xs:element name="business" type="xs:boolean"/>
+<xs:element name="offset" type="xs:int"/>
+<xs:element name="limit" type="xs:int"/>
+<xs:element minOccurs="0" name="modules" type="xs:string"/>
+<xs:element minOccurs="0" name="customConfig" type="xs:string"/>
+<xs:element minOccurs="0" name="productConfig" type="xs:string"/>
+<xs:element minOccurs="0" name="campaignIdentifier" type="xs:string"/>
+<xs:element minOccurs="0" name="fixedConfig" type="xs:string"/>
+<xs:element minOccurs="0" name="tariffHost" type="xs:string"/>
+<xs:element minOccurs="0" name="savingsMode" type="tns:savingsMode"/>
+<xs:element minOccurs="0" name="startDate" type="xs:string"/>
+<xs:element minOccurs="0" name="endDate" type="xs:string"/>
+<xs:element minOccurs="0" name="signatureDate" type="xs:string"/>
+<xs:element name="settingEco" type="xs:boolean"/>
+<xs:element name="settingFakeEco" type="xs:boolean"/>
+<xs:element name="initialDuration" type="xs:int"/>
+<xs:element name="settingPackage" type="xs:boolean"/>
+<xs:element name="settingBonus" type="xs:boolean"/>
+<xs:element name="settingPrepaid" type="xs:boolean"/>
+<xs:element name="settingGuarantee" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getComparedProductInformationListResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="data" type="tns:comparedProductInformationList"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="comparedProductInformationList">
+<xs:sequence>
+<xs:element name="total" type="xs:int"/>
+<xs:element name="offset" type="xs:int"/>
+<xs:element name="limit" type="xs:int"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="information" nillable="true" type="tns:comparedProductInformation"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="assoc">
+<xs:sequence>
+<xs:element minOccurs="0" name="key" type="xs:anyType"/>
+<xs:element minOccurs="0" name="value" type="xs:anyType"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getPrimaryProducts">
+<xs:sequence>
+<xs:element name="cityId" type="xs:long"/>
+<xs:element name="providerId" type="xs:int"/>
+<xs:element name="usage" type="xs:int"/>
+<xs:element name="business" type="xs:boolean"/>
+<xs:element name="netNumber" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getPrimaryProductsResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="product" type="tns:primaryProduct"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="primaryProduct">
+<xs:sequence>
+<xs:element name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+<xs:element minOccurs="0" name="nameSimplified" type="xs:string"/>
+<xs:element name="primary" type="xs:boolean"/>
+<xs:element name="variant" type="xs:int"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="premiumDescriptionTexts" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getProviderByCodeNumber">
+<xs:sequence>
+<xs:element minOccurs="0" name="codeNumber" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getProviderByCodeNumberResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="provider" type="tns:provider"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="provider">
+<xs:sequence>
+<xs:element name="id" type="xs:int"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+<xs:element minOccurs="0" name="codeNumber" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getNetFees">
+<xs:sequence>
+<xs:element name="cityId" type="xs:int"/>
+<xs:element name="usage" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getNetFeesResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="netFee" type="tns:netFee"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getProductPriceInformation">
+<xs:sequence>
+<xs:element name="postcode" type="xs:int"/>
+<xs:element name="usage" type="xs:int"/>
+<xs:element minOccurs="0" name="productConfig" type="xs:string"/>
+<xs:element minOccurs="0" name="tariffHost" type="xs:string"/>
+<xs:element minOccurs="0" name="startDate" type="xs:string"/>
+<xs:element minOccurs="0" name="endDate" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getProductPriceInformationResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="productPriceInformation" type="tns:productPriceInformation"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="productPriceInformation">
+<xs:complexContent>
+<xs:extension base="tns:response">
+<xs:sequence>
+<xs:element minOccurs="0" name="productPrices">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="productPrice" type="tns:moduleInformation"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="response">
+<xs:sequence>
+<xs:element name="status" type="xs:boolean"/>
+<xs:element minOccurs="0" name="errors">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="error" type="tns:error"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="error">
+<xs:sequence>
+<xs:element minOccurs="0" name="errorCode" type="xs:string"/>
+<xs:element minOccurs="0" name="errorField" type="xs:string"/>
+<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+<xs:element name="errorFieldsAreJson" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getProviderById">
+<xs:sequence>
+<xs:element name="providerId" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getProviderByIdResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="provider" type="tns:provider"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getNetData">
+<xs:sequence>
+<xs:element name="netNumber" type="xs:int"/>
+<xs:element name="netSubNumber" type="xs:int"/>
+<xs:element name="netAreaNumber" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getNetDataResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="data" type="tns:netData"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="netData">
+<xs:sequence>
+<xs:element name="id" type="xs:long"/>
+<xs:element name="codeNumber" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+<xs:simpleType name="fixedPriceType">
+<xs:restriction base="xs:string">
+<xs:enumeration value="NONE"/>
+<xs:enumeration value="FIX"/>
+<xs:enumeration value="NETTO"/>
+<xs:enumeration value="NETTO_NETTO"/>
+<xs:enumeration value="ENERGY"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="productType">
+<xs:restriction base="xs:string">
+<xs:enumeration value="STANDARD"/>
+<xs:enumeration value="PACKAGE"/>
+<xs:enumeration value="BUDGET"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="bonusType">
+<xs:restriction base="xs:string">
+<xs:enumeration value="FIXED"/>
+<xs:enumeration value="PERCENTAGE"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="durationType">
+<xs:restriction base="xs:string">
+<xs:enumeration value="DAYS"/>
+<xs:enumeration value="WEEKS"/>
+<xs:enumeration value="MONTHS"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="savingsMode">
+<xs:restriction base="xs:string">
+<xs:enumeration value="ALL"/>
+<xs:enumeration value="BONUS"/>
+<xs:enumeration value="REAL"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:element name="LimitException" type="tns:LimitException"/>
+<xs:complexType name="LimitException">
+<xs:sequence>
+<xs:element minOccurs="0" name="message" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="calculateDeposit" nillable="true" type="ns0:calculateDeposit"/>
+<xs:element name="calculateDepositResponse" nillable="true" type="ns0:calculateDepositResponse"/>
+<xs:element name="getProductsByCampaign" nillable="true" type="ns0:getProductsByCampaign"/>
+<xs:element name="getProductsByCampaignResponse" nillable="true" type="ns0:getProductsByCampaignResponse"/>
+<xs:element name="ping" nillable="true" type="ns1:ping"/>
+<xs:element name="pingResponse" nillable="true" type="ns1:pingResponse"/>
+<xs:element name="unitTest" nillable="true" type="ns0:unitTest"/>
+<xs:element name="unitTestResponse" nillable="true" type="ns0:unitTestResponse"/>
+<xs:element name="revalidate" nillable="true" type="ns0:revalidate"/>
+<xs:element name="revalidateResponse" nillable="true" type="ns0:revalidateResponse"/>
+<xs:element name="getConfig" nillable="true" type="ns0:getConfig"/>
+<xs:element name="getConfigResponse" nillable="true" type="ns0:getConfigResponse"/>
+<xs:element name="isValid" nillable="true" type="ns0:isValid"/>
+<xs:element name="isValidResponse" nillable="true" type="ns0:isValidResponse"/>
+</xs:schema>
+</wsdl:types>
+<wsdl:message name="getModuleInformation">
+<wsdl:part element="tns:getModuleInformation" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getPrimaryProductInformationResponse">
+<wsdl:part element="tns:getPrimaryProductInformationResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getComparedProductInformationSimple">
+<wsdl:part element="tns:getComparedProductInformationSimple" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getNetCarriersResponse">
+<wsdl:part element="tns:getNetCarriersResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="calculateDepositResponse">
+<wsdl:part element="tns:calculateDepositResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getProviderProductNames">
+<wsdl:part element="tns:getProviderProductNames" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getNetFee">
+<wsdl:part element="tns:getNetFee" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getPrimaryProductInformation">
+<wsdl:part element="tns:getPrimaryProductInformation" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getCitiesResponse">
+<wsdl:part element="tns:getCitiesResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getNetFeesResponse">
+<wsdl:part element="tns:getNetFeesResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAllProvidersResponse">
+<wsdl:part element="tns:getAllProvidersResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getComparedProductInformationSingle">
+<wsdl:part element="tns:getComparedProductInformationSingle" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="isValidResponse">
+<wsdl:part element="tns:isValidResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getStreetsByCityId">
+<wsdl:part element="tns:getStreetsByCityId" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAllPrimaryProductInformationResponse">
+<wsdl:part element="tns:getAllPrimaryProductInformationResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAllPrimaryProductInformation">
+<wsdl:part element="tns:getAllPrimaryProductInformation" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getComparedProductInformationSingleResponse">
+<wsdl:part element="tns:getComparedProductInformationSingleResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getCities">
+<wsdl:part element="tns:getCities" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="unitTest">
+<wsdl:part element="tns:unitTest" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getProviderByIdResponse">
+<wsdl:part element="tns:getProviderByIdResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getCitiesByPostcode">
+<wsdl:part element="tns:getCitiesByPostcode" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="revalidate">
+<wsdl:part element="tns:revalidate" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getNetDataResponse">
+<wsdl:part element="tns:getNetDataResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getComparedProductInformationList">
+<wsdl:part element="tns:getComparedProductInformationList" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getPrimaryProvidersResponse">
+<wsdl:part element="tns:getPrimaryProvidersResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getNetFees">
+<wsdl:part element="tns:getNetFees" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getProductPriceInformation">
+<wsdl:part element="tns:getProductPriceInformation" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getBasicSuppliersForPostCodeResponse">
+<wsdl:part element="tns:getBasicSuppliersForPostCodeResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getNetFeeResponse">
+<wsdl:part element="tns:getNetFeeResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getProviderById">
+<wsdl:part element="tns:getProviderById" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getNetData">
+<wsdl:part element="tns:getNetData" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="revalidateResponse">
+<wsdl:part element="tns:revalidateResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getPrimaryProductsResponse">
+<wsdl:part element="tns:getPrimaryProductsResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getProviderByCodeNumberResponse">
+<wsdl:part element="tns:getProviderByCodeNumberResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getBasicSuppliersForPostCode">
+<wsdl:part element="tns:getBasicSuppliersForPostCode" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="calculateDeposit">
+<wsdl:part element="tns:calculateDeposit" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getProductsByCampaign">
+<wsdl:part element="tns:getProductsByCampaign" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getEffectiveDate">
+<wsdl:part element="tns:getEffectiveDate" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getStreetsByCityIdResponse">
+<wsdl:part element="tns:getStreetsByCityIdResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getGridData">
+<wsdl:part element="tns:getGridData" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="unitTestResponse">
+<wsdl:part element="tns:unitTestResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="ping">
+<wsdl:part element="tns:ping" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getCityById">
+<wsdl:part element="tns:getCityById" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getStreetDataResponse">
+<wsdl:part element="tns:getStreetDataResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getConfigResponse">
+<wsdl:part element="tns:getConfigResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getNetCarriers">
+<wsdl:part element="tns:getNetCarriers" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getProviderProductNamesResponse">
+<wsdl:part element="tns:getProviderProductNamesResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getComparedProductInformationSimpleResponse">
+<wsdl:part element="tns:getComparedProductInformationSimpleResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAllProviders">
+<wsdl:part element="tns:getAllProviders" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getComparedProductInformationListResponse">
+<wsdl:part element="tns:getComparedProductInformationListResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="pingResponse">
+<wsdl:part element="tns:pingResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getPrimaryProviders">
+<wsdl:part element="tns:getPrimaryProviders" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="LimitException">
+<wsdl:part element="tns:LimitException" name="LimitException"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getStreetData">
+<wsdl:part element="tns:getStreetData" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getModuleInformationResponse">
+<wsdl:part element="tns:getModuleInformationResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getEffectiveDateResponse">
+<wsdl:part element="tns:getEffectiveDateResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getProductsByCampaignResponse">
+<wsdl:part element="tns:getProductsByCampaignResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getCitiesByPostcodeResponse">
+<wsdl:part element="tns:getCitiesByPostcodeResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getConfig">
+<wsdl:part element="tns:getConfig" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getPrimaryProducts">
+<wsdl:part element="tns:getPrimaryProducts" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getProviderByCodeNumber">
+<wsdl:part element="tns:getProviderByCodeNumber" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getProductPriceInformationResponse">
+<wsdl:part element="tns:getProductPriceInformationResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="isValid">
+<wsdl:part element="tns:isValid" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getCityByIdResponse">
+<wsdl:part element="tns:getCityByIdResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getGridDataResponse">
+<wsdl:part element="tns:getGridDataResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:portType name="Electricity">
+<wsdl:operation name="getBasicSuppliersForPostCode">
+<wsdl:input message="tns:getBasicSuppliersForPostCode" name="getBasicSuppliersForPostCode"> </wsdl:input>
+<wsdl:output message="tns:getBasicSuppliersForPostCodeResponse" name="getBasicSuppliersForPostCodeResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getModuleInformation">
+<wsdl:input message="tns:getModuleInformation" name="getModuleInformation"> </wsdl:input>
+<wsdl:output message="tns:getModuleInformationResponse" name="getModuleInformationResponse"> </wsdl:output>
+<wsdl:fault message="tns:LimitException" name="LimitException"> </wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="calculateDeposit">
+<wsdl:input message="tns:calculateDeposit" name="calculateDeposit"> </wsdl:input>
+<wsdl:output message="tns:calculateDepositResponse" name="calculateDepositResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getComparedProductInformationSimple">
+<wsdl:input message="tns:getComparedProductInformationSimple" name="getComparedProductInformationSimple"> </wsdl:input>
+<wsdl:output message="tns:getComparedProductInformationSimpleResponse" name="getComparedProductInformationSimpleResponse"> </wsdl:output>
+<wsdl:fault message="tns:LimitException" name="LimitException"> </wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getProductsByCampaign">
+<wsdl:input message="tns:getProductsByCampaign" name="getProductsByCampaign"> </wsdl:input>
+<wsdl:output message="tns:getProductsByCampaignResponse" name="getProductsByCampaignResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getEffectiveDate">
+<wsdl:input message="tns:getEffectiveDate" name="getEffectiveDate"> </wsdl:input>
+<wsdl:output message="tns:getEffectiveDateResponse" name="getEffectiveDateResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getProviderProductNames">
+<wsdl:input message="tns:getProviderProductNames" name="getProviderProductNames"> </wsdl:input>
+<wsdl:output message="tns:getProviderProductNamesResponse" name="getProviderProductNamesResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getGridData">
+<wsdl:input message="tns:getGridData" name="getGridData"> </wsdl:input>
+<wsdl:output message="tns:getGridDataResponse" name="getGridDataResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getNetFee">
+<wsdl:input message="tns:getNetFee" name="getNetFee"> </wsdl:input>
+<wsdl:output message="tns:getNetFeeResponse" name="getNetFeeResponse"> </wsdl:output>
+<wsdl:fault message="tns:LimitException" name="LimitException"> </wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getPrimaryProductInformation">
+<wsdl:input message="tns:getPrimaryProductInformation" name="getPrimaryProductInformation"> </wsdl:input>
+<wsdl:output message="tns:getPrimaryProductInformationResponse" name="getPrimaryProductInformationResponse"> </wsdl:output>
+<wsdl:fault message="tns:LimitException" name="LimitException"> </wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getComparedProductInformationSingle">
+<wsdl:input message="tns:getComparedProductInformationSingle" name="getComparedProductInformationSingle"> </wsdl:input>
+<wsdl:output message="tns:getComparedProductInformationSingleResponse" name="getComparedProductInformationSingleResponse"> </wsdl:output>
+<wsdl:fault message="tns:LimitException" name="LimitException"> </wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="ping">
+<wsdl:input message="tns:ping" name="ping"> </wsdl:input>
+<wsdl:output message="tns:pingResponse" name="pingResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getCityById">
+<wsdl:input message="tns:getCityById" name="getCityById"> </wsdl:input>
+<wsdl:output message="tns:getCityByIdResponse" name="getCityByIdResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getStreetsByCityId">
+<wsdl:input message="tns:getStreetsByCityId" name="getStreetsByCityId"> </wsdl:input>
+<wsdl:output message="tns:getStreetsByCityIdResponse" name="getStreetsByCityIdResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getNetCarriers">
+<wsdl:input message="tns:getNetCarriers" name="getNetCarriers"> </wsdl:input>
+<wsdl:output message="tns:getNetCarriersResponse" name="getNetCarriersResponse"> </wsdl:output>
+<wsdl:fault message="tns:LimitException" name="LimitException"> </wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getAllProviders">
+<wsdl:input message="tns:getAllProviders" name="getAllProviders"> </wsdl:input>
+<wsdl:output message="tns:getAllProvidersResponse" name="getAllProvidersResponse"> </wsdl:output>
+<wsdl:fault message="tns:LimitException" name="LimitException"> </wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getAllPrimaryProductInformation">
+<wsdl:input message="tns:getAllPrimaryProductInformation" name="getAllPrimaryProductInformation"> </wsdl:input>
+<wsdl:output message="tns:getAllPrimaryProductInformationResponse" name="getAllPrimaryProductInformationResponse"> </wsdl:output>
+<wsdl:fault message="tns:LimitException" name="LimitException"> </wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getPrimaryProviders">
+<wsdl:input message="tns:getPrimaryProviders" name="getPrimaryProviders"> </wsdl:input>
+<wsdl:output message="tns:getPrimaryProvidersResponse" name="getPrimaryProvidersResponse"> </wsdl:output>
+<wsdl:fault message="tns:LimitException" name="LimitException"> </wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getCities">
+<wsdl:input message="tns:getCities" name="getCities"> </wsdl:input>
+<wsdl:output message="tns:getCitiesResponse" name="getCitiesResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getStreetData">
+<wsdl:input message="tns:getStreetData" name="getStreetData"> </wsdl:input>
+<wsdl:output message="tns:getStreetDataResponse" name="getStreetDataResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="unitTest">
+<wsdl:input message="tns:unitTest" name="unitTest"> </wsdl:input>
+<wsdl:output message="tns:unitTestResponse" name="unitTestResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getCitiesByPostcode">
+<wsdl:input message="tns:getCitiesByPostcode" name="getCitiesByPostcode"> </wsdl:input>
+<wsdl:output message="tns:getCitiesByPostcodeResponse" name="getCitiesByPostcodeResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="revalidate">
+<wsdl:input message="tns:revalidate" name="revalidate"> </wsdl:input>
+<wsdl:output message="tns:revalidateResponse" name="revalidateResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getComparedProductInformationList">
+<wsdl:input message="tns:getComparedProductInformationList" name="getComparedProductInformationList"> </wsdl:input>
+<wsdl:output message="tns:getComparedProductInformationListResponse" name="getComparedProductInformationListResponse"> </wsdl:output>
+<wsdl:fault message="tns:LimitException" name="LimitException"> </wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getConfig">
+<wsdl:input message="tns:getConfig" name="getConfig"> </wsdl:input>
+<wsdl:output message="tns:getConfigResponse" name="getConfigResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getPrimaryProducts">
+<wsdl:input message="tns:getPrimaryProducts" name="getPrimaryProducts"> </wsdl:input>
+<wsdl:output message="tns:getPrimaryProductsResponse" name="getPrimaryProductsResponse"> </wsdl:output>
+<wsdl:fault message="tns:LimitException" name="LimitException"> </wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getProviderByCodeNumber">
+<wsdl:input message="tns:getProviderByCodeNumber" name="getProviderByCodeNumber"> </wsdl:input>
+<wsdl:output message="tns:getProviderByCodeNumberResponse" name="getProviderByCodeNumberResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getNetFees">
+<wsdl:input message="tns:getNetFees" name="getNetFees"> </wsdl:input>
+<wsdl:output message="tns:getNetFeesResponse" name="getNetFeesResponse"> </wsdl:output>
+<wsdl:fault message="tns:LimitException" name="LimitException"> </wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getProductPriceInformation">
+<wsdl:input message="tns:getProductPriceInformation" name="getProductPriceInformation"> </wsdl:input>
+<wsdl:output message="tns:getProductPriceInformationResponse" name="getProductPriceInformationResponse"> </wsdl:output>
+<wsdl:fault message="tns:LimitException" name="LimitException"> </wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getProviderById">
+<wsdl:input message="tns:getProviderById" name="getProviderById"> </wsdl:input>
+<wsdl:output message="tns:getProviderByIdResponse" name="getProviderByIdResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getNetData">
+<wsdl:input message="tns:getNetData" name="getNetData"> </wsdl:input>
+<wsdl:output message="tns:getNetDataResponse" name="getNetDataResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="isValid">
+<wsdl:input message="tns:isValid" name="isValid"> </wsdl:input>
+<wsdl:output message="tns:isValidResponse" name="isValidResponse"> </wsdl:output>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="ElectricitySoapBinding" type="tns:Electricity">
+<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="getBasicSuppliersForPostCode">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getBasicSuppliersForPostCode">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getBasicSuppliersForPostCodeResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getModuleInformation">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getModuleInformation">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getModuleInformationResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="LimitException">
+<soap:fault name="LimitException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="calculateDeposit">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="calculateDeposit">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="calculateDepositResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getProductsByCampaign">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getProductsByCampaign">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getProductsByCampaignResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getComparedProductInformationSimple">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getComparedProductInformationSimple">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getComparedProductInformationSimpleResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="LimitException">
+<soap:fault name="LimitException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getEffectiveDate">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getEffectiveDate">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getEffectiveDateResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getProviderProductNames">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getProviderProductNames">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getProviderProductNamesResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getGridData">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getGridData">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getGridDataResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getNetFee">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getNetFee">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getNetFeeResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="LimitException">
+<soap:fault name="LimitException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getPrimaryProductInformation">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getPrimaryProductInformation">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getPrimaryProductInformationResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="LimitException">
+<soap:fault name="LimitException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getComparedProductInformationSingle">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getComparedProductInformationSingle">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getComparedProductInformationSingleResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="LimitException">
+<soap:fault name="LimitException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="ping">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="ping">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="pingResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getCityById">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getCityById">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getCityByIdResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getStreetsByCityId">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getStreetsByCityId">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getStreetsByCityIdResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getNetCarriers">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getNetCarriers">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getNetCarriersResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="LimitException">
+<soap:fault name="LimitException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getAllProviders">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getAllProviders">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getAllProvidersResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="LimitException">
+<soap:fault name="LimitException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getAllPrimaryProductInformation">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getAllPrimaryProductInformation">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getAllPrimaryProductInformationResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="LimitException">
+<soap:fault name="LimitException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getPrimaryProviders">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getPrimaryProviders">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getPrimaryProvidersResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="LimitException">
+<soap:fault name="LimitException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getCities">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getCities">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getCitiesResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getStreetData">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getStreetData">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getStreetDataResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="unitTest">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="unitTest">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="unitTestResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getCitiesByPostcode">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getCitiesByPostcode">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getCitiesByPostcodeResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="revalidate">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="revalidate">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="revalidateResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getComparedProductInformationList">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getComparedProductInformationList">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getComparedProductInformationListResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="LimitException">
+<soap:fault name="LimitException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getConfig">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getConfig">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getConfigResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getPrimaryProducts">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getPrimaryProducts">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getPrimaryProductsResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="LimitException">
+<soap:fault name="LimitException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getProviderByCodeNumber">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getProviderByCodeNumber">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getProviderByCodeNumberResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getNetFees">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getNetFees">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getNetFeesResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="LimitException">
+<soap:fault name="LimitException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getProductPriceInformation">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getProductPriceInformation">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getProductPriceInformationResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="LimitException">
+<soap:fault name="LimitException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getProviderById">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getProviderById">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getProviderByIdResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getNetData">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getNetData">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getNetDataResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="isValid">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="isValid">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="isValidResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="Electricity">
+<wsdl:port binding="tns:ElectricitySoapBinding" name="ElectricityPort">
+<soap:address location="https://energy.service-nodes.powercloud.de:443/service/Electricity"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>

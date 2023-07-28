@@ -18,25 +18,34 @@ class ApiController extends BaseController
     
     public function store(Request $request)
     {
-        $pc = new PowerCloudRest();
+        
         $input = $request->all();
+        // Check if input is valid 
         $validator = Validator::make($input, [
             'surname' => 'required',
             'firstName' => 'required',
             'business' => 'required',
             'client_id' => 'required',
         ]);
+
+        // Our validation failed
         if($validator->fails()){
             return $this->sendError('Refused from FTP', $validator->errors());       
         }
         
         // Send the data to Powercloud
+        $pc = new PowerCloudRest();
         $powercloud_response = $pc->createOrder($input);
+        
         // Check the success status and send response back
-        $success  = !(isset($powercloud_response['success'])) || $powercloud_response['success'] != true ? false : true; 
+        $success  = (isset($powercloud_response['success']) && $powercloud_response['success'] == true) ? true : false; 
+
+        // PC accepted
         if ($success){
-            return $this->sendResponse(new Ftpapi($powercloud_response), 'Order created.',200);
+            return $this->sendResponse('Order created.', new Ftpapi($powercloud_response), 200);
         }
+
+        // PC refused
         else{
              return $this->sendError('Refused from Powercloud', new Ftpapi($powercloud_response), 400);
         }

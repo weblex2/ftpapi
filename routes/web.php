@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PowerCloudRest;
+use App\Http\Controllers\PowerCloudSoap;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,5 +42,9 @@ Route::middleware([
 Route::controller(PowerCloudRest::class)->group(function () {
     Route::get('/getContract', 'test')->name('getContract'); 
     Route::get('/orderTest', 'newOrderTest')->name('newOrderTest'); 
-    
+});
+
+Route::controller(PowerCloudSoap::class)->group(function () {
+    Route::get('/getTariffs', 'getTariffs')->name('getTariffs');  
+    Route::get('/getInfo/{zip}/{usage?}/{business?}', 'getInfo')->name('getInfo');  
 });

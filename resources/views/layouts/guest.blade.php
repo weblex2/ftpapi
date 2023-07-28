@@ -31,7 +31,6 @@
 
             <!-- Page Content -->
             <main>
-                <x-configuration-menu/>
                 {{ $slot }}
             </main>
         </div>

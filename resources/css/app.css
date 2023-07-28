@@ -16,3 +16,8 @@
 #configurationMenu .confItem{
     @apply hover:bg-gray-300 text-sm p-2
 }
+
+.dropdown{
+    @apply rounded-xl bg-slate-100 text-black px-10 py-2
+}
+
